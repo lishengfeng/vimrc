@@ -252,6 +252,23 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+"split right
+"vertical
+nmap wv <C-w>v
+"split cancel
+nmap wc <C-w>c
+"split below
+"horizontal
+nmap ws <C-w>s
+"split quit
+nmap wq <C-w>q
+"put the new buffer on the right of the current buffer
+set splitright
+"put the new buffer below the current buffer
+set splitbelow
+"split file command
+":sp filename for a horizontal split
+":vsp filename or :vs filename for a vertical split
 
 " Close the current buffer
 map <leader>bd :Bclose<cr>
@@ -265,8 +282,80 @@ map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
 
-" Opens a new tab with the current file
-    map <leader><space> :vimgrep // <C-R>%<C-B><right><right><right><right><right><right><right><right><right>
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Specify the behavior when switching between buffers 
+try
+    set switchbuf=useopen,usetab,newtab
+    set stal=2
+catch
+endtry
+
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal! g`\"" |
+            \ endif
+" Remember info about open buffers on close
+set viminfo^=%
+
+
+""""""""""""""""""""""""""""""
+" => Status line
+""""""""""""""""""""""""""""""
+" Always show the status line
+set laststatus=2
+
+" Format the status line
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remap VIM 0 to first non-blank character
+"map 0 ^
+
+" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+"nmap <M-j> mz:m+<cr>`z
+"nmap <M-k> mz:m-2<cr>`z
+"vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+"vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+"if has("mac") || has("macunix")
+"    nmap <D-j> <M-j>
+"    nmap <D-k> <M-k>
+"    vmap <D-j> <M-j>
+"    vmap <D-k> <M-k>
+"endif
+
+" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+func! DeleteTrailingWS()
+    exe "normal mz"
+    %s/\s\+$//ge
+    exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vimgrep searching and cope displaying
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" When you press gv you vimgrep after the selected text
+vnoremap <silent>gv :call VisualSelection('gv')<CR>
+
+" Open vimgrep and put the cursor in the right position
+" after search u can use :cw to show result
+map <leader>g :vimgrep //gj **/*<left><left><left><left><left><left><left><left>
+
+" Vimgreps in the current file
+map <leader><space> :vimgrep // <C-R>%<C-B><right><right><right><right><right><right><right><right><right>
 
 " When you press <leader>r you can search and replace the selected text
 vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
@@ -343,6 +432,14 @@ function! VisualSelection(direction) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    en
+    return ''
+endfunction
+
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
@@ -375,7 +472,7 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 let Tlist_Use_Right_Window=1
 let Tlist_File_Fold_Auto_Close=1
 let Tlist_Exit_OnlyWindow=1
-"map <leader>tt :TlistToggle<cr>
+nmap <leader>tt :TlistToggle<cr>
 "WimManager
 let g:winManagerWindowLayout='TagList|FileExplorer,BufExplorer'
 nmap <silent> <F8> :WMToggle<cr>
@@ -415,3 +512,4 @@ nmap <leader>shs :ConqueTermSplit bash<cr>
 nmap <leader>shv :ConqueTermVSplit bash<cr>
 nmap <leader>sht :ConqueTermTab bash<cr>
 set list
+
