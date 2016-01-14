@@ -343,14 +343,13 @@ let g:EchoFuncKeyPrev='<Esc>-'
 "endif
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-    exe "normal mz"
-    %s/\s\+$//ge
-    exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
+"func! DeleteTrailingWS()
+"    exe "normal mz"
+"    %s/\s\+$//ge
+"    exe "normal `z"
+"endfunc
+"autocmd BufWrite *.py :call DeleteTrailingWS()
+"autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vimgrep searching and cope displaying
@@ -379,9 +378,12 @@ vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
 " To go to the previous search results do:
 "   <leader>p
 "
+"equal :cw
 map <leader>cc :botright cope<cr>
-map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
+"map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
+"show the next result of vimgrep
 map <leader>n :cn<cr>
+"show the previous result of vimgrep
 map <leader>p :cp<cr>
 
 
@@ -392,17 +394,18 @@ map <leader>p :cp<cr>
 map <leader>ss :setlocal spell!<cr>
 
 " Shortcuts using <leader>
-map <leader>sn ]s
-map <leader>sp [s
-map <leader>sa zg
-map <leader>s? z=
+" spell function
+"map <leader>sn ]s
+"map <leader>sp [s
+"map <leader>sa zg
+"map <leader>s? z=
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
->
+
 " Quickly open a buffer for scripbble
 map <leader>q :e ~/buffer<cr>
 
@@ -476,8 +479,9 @@ endfunction
 "map <silent> <leader>ee :e ~/.vimrc<cr>
 "When .vimrc is edited, reload it
 autocmd! bufwritepost .vimrc source ~/.vimrc 
-"===================================-
-"Tlist
+""""""""""""""""""""""""""""""""""""""""""""
+"Tlist function
+""""""""""""""""""""""""""""""""""""""""""""
 let Tlist_Use_Right_Window=1
 let Tlist_File_Fold_Auto_Close=1
 let Tlist_Exit_OnlyWindow=1
@@ -496,22 +500,27 @@ endfunction
 nmap <silent> <F9> :call CreateCtags()<cr> 
 "nmap <F9> :ctags --c++-kinds=+p --fields=iaS --extra=+q "$@"
 
-"conque
+"""""""""""""""""""""""""""""""""""""""""""""
+"Conque plugin
+"""""""""""""""""""""""""""""""""""""""""""""
 let g:ConqueTerm_CWInsert=1
 let g:ConqueTerm_InsertOnEnter =1
+"avoid conflic with <F8> WMToggle
+let g:ConqueTerm_ToggleKey='<F4>'
 function! ConqueTermMode()
     setlocal tw=0
     setlocal nolist
     setlocal nospell
     " Work-around the bug with Tlist
-    inoremap <buffer> <c-w>h <esc><c-w>h
-    inoremap <buffer> <c-w>j <esc><c-w>j
-    inoremap <buffer> <c-w>k <esc><c-w>k
-    inoremap <buffer> <c-w>l <esc><c-w>l
-    inoremap <buffer> <esc><c-w>h <esc><c-w>h
-    inoremap <buffer> <esc><c-w>j <esc><c-w>j
-    inoremap <buffer> <esc><c-w>k <esc><c-w>k
-    inoremap <buffer> <esc><c-w>l <esc><c-w>l
+"already upside
+"    inoremap <buffer> <c-w>h <esc><c-w>h
+"    inoremap <buffer> <c-w>j <esc><c-w>j
+"    inoremap <buffer> <c-w>k <esc><c-w>k
+"    inoremap <buffer> <c-w>l <esc><c-w>l
+"    inoremap <buffer> <esc><c-w>h <esc><c-w>h
+"    inoremap <buffer> <esc><c-w>j <esc><c-w>j
+"    inoremap <buffer> <esc><c-w>k <esc><c-w>k
+"    inoremap <buffer> <esc><c-w>l <esc><c-w>l
 endfunction
 command! -nargs=0 ConqueTermMode call ConqueTermMode()
 
@@ -520,5 +529,6 @@ nmap <leader>sh :ConqueTerm  bash<cr>
 nmap <leader>shs :ConqueTermSplit bash<cr>
 nmap <leader>shv :ConqueTermVSplit bash<cr>
 nmap <leader>sht :ConqueTermTab bash<cr>
+"show the line end with $ 
 set list
 

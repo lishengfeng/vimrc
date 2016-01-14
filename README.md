@@ -70,3 +70,7 @@ vimrc
 #details http://www.vim.org/scripts/script.php?script_id=1735
 #check Usage
 #for example:when insert toast( the statebar will show the definition of toast
+
+12.install conque
+#Run interactive commands inside a Vim buffer 
+#details http://www.vim.org/scripts/script.php?script_id=2771
