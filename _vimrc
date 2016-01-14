@@ -66,8 +66,9 @@ set cindent
 :inoremap ] <c-r>=ClosePair(']')<CR>
 :inoremap < <><ESC>i
 :inoremap > <c-r>=ClosePair('>')<CR>
-:inoremap <Tab> <C-R>=TabSkip()<CR>
-
+"<Tab> is conflic to SnippetsEmu plugin
+"use <s-tab> shift+tab instead
+:inoremap <s-tab> <C-R>=TabSkip()<CR>
 
 function! ClosePair(char)
     if getline('.')[col('.') - 1] == a:char
@@ -312,9 +313,16 @@ set viminfo^=%
 set laststatus=2
 
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
-
-
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ %{EchoFuncGetStatusLine()}\ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+""""""""""""""""""""""""""""""
+" =>EchoFunc plugin
+""""""""""""""""""""""""""""""
+"echofunc plugin echo function name in statusline not message line
+let g:EchoFuncShowOnStatus = 1
+"next function
+let g:EchoFuncKeyNext='<Esc>+'
+"prefunction
+let g:EchoFuncKeyPrev='<Esc>-'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -433,6 +441,7 @@ function! VisualSelection(direction) range
     let @" = l:saved_reg
 endfunction
 " Returns true if paste mode is enabled
+" use :setlocal paste! or <leader>pp to enable
 function! HasPaste()
     if &paste
         return 'PASTE MODE  '
