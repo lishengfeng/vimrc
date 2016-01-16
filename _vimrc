@@ -530,5 +530,10 @@ nmap <leader>shs :ConqueTermSplit bash<cr>
 nmap <leader>shv :ConqueTermVSplit bash<cr>
 nmap <leader>sht :ConqueTermTab bash<cr>
 "show the line end with $ 
+""""""""""""""""""""""""""""""""""""""""""
+"A config
+""""""""""""""""""""""""""""""""""""""""""
+"use F12 to switch between .c and .h
+nnoremap <silent> <F12> :A<cr>
 set list
 
