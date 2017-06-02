@@ -552,4 +552,10 @@ nmap <leader>sht :ConqueTermTab bash<cr>
 "use F12 to switch between .c and .h
 nnoremap <silent> <F12> :A<cr>
 set list
-
+au BufRead,BufNewFile *.logcat set filetype=logcat
+let g:easyescape_chars = { "j": 1, "k": 1 }
+let g:easyescape_timeout = 100
+inoremap jk <ESC>
+inoremap kj <ESC>
+cnoremap jk <ESC>
+cnoremap kj <ESC>
