@@ -58,8 +58,11 @@ set cindent
 "set backspace=indent,eol,start
 
 "automatically complete bracket
-:inoremap ( ()<ESC>i
-:inoremap ) <c-r>=ClosePair(')')<CR>
+"remap by echofunc
+"via vim :scriptnames to see what files are read on startup
+"via vim :verbose inoremap ) to check last set
+":inoremap ( ()<ESC>i
+":inoremap ) <c-r>=ClosePair(')')<CR>
 :inoremap { {}<ESC>i
 :inoremap } <c-r>=ClosePair('}')<CR>
 :inoremap [ []<ESC>i
