@@ -59,7 +59,7 @@ set cindent
 
 "automatically complete bracket
 "remap by echofunc
-"via vim :scriptnames to see what files are read on startup
+"via vim :scriptnames to seee what files are read on startup
 "via vim :verbose inoremap ) to check last set
 ":inoremap ( ()<ESC>i
 ":inoremap ) <c-r>=ClosePair(')')<CR>
@@ -421,6 +421,8 @@ map <leader>ss :setlocal spell!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+" Remove the Windows ^I
+noremap <Leader>i :retab <CR>
 
 " Quickly open a buffer for scripbble
 map <leader>q :e ~/buffer<cr>
