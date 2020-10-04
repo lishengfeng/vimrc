@@ -56,10 +56,12 @@ set softtabstop=4
 set cindent
 "set nobackup
 "set backspace=indent,eol,start
+"Without this, whenever you switch buffers, Vim will prompt you to save the file (you don't want that if you want to move quickly between buffers). For more information, check out :h hidden
+set hidden
 
 "automatically complete bracket
 "remap by echofunc
-"via vim :scriptnames to seee what files are read on startup
+"via vim :scriptnames to see what files are read on startup
 "via vim :verbose inoremap ) to check last set
 ":inoremap ( ()<ESC>i
 ":inoremap ) <c-r>=ClosePair(')')<CR>
