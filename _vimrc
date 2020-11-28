@@ -42,6 +42,18 @@
 "compatible mode means compatibility to old vi.
 "all the enhancements and improvements of Vi Improved are turned off.
 set nocompatible
+
+""""""""""""""""""""""""""
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+" Add plugins here
+
+call vundle#end()
+""""""""""""""""""""""""""
+
 "set number
 "set autoindent
 "set smartindent
@@ -555,7 +567,7 @@ nmap <leader>sht :ConqueTermTab bash<cr>
 """"""""""""""""""""""""""""""""""""""""""
 "use F12 to switch between .c and .h
 nnoremap <silent> <F12> :A<cr>
-set list
+"set list
 au BufRead,BufNewFile *.logcat set filetype=logcat
 let g:easyescape_chars = { "j": 1, "k": 1 }
 let g:easyescape_timeout = 100
@@ -565,3 +577,25 @@ cnoremap jk <ESC>
 cnoremap kj <ESC>
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
+" mkdir -p ~/.vim/plugin
+" mkdir -p ~/.vim/bundle
+" wget -P ~/.vim/plugin/ https://raw.githubusercontent.com/mbbill/echofunc/master/after/plugin/echofunc.vim
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" Now add the following lines as shown in the screenshot below. Then save and exit vim with VIM command ‘:wq!’
+""""""""""""""""""""""""""""""""""""""""""
+"set nocompatible
+"filetype off
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
+"Plugin 'VundleVim/Vundle.vim'
+"
+"" Add plugins here
+"
+"call vundle#end()
+"filetype plugin indent on
+""""""""""""""""""""""""""""""""""""""""""
+" Now open vim.
+" Run the following VIM command to initialize Vundle Plugin Manager:
+" :PluginInstall
+Plugin 'frazrepo/vim-rainbow'
+let g:rainbow_active = 1
