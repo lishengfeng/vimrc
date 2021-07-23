@@ -599,3 +599,5 @@ cmap w!! w !sudo tee > /dev/null %
 " :PluginInstall
 Plugin 'frazrepo/vim-rainbow'
 let g:rainbow_active = 1
+"In order to get the nice 2-space YAML as the defaultpick
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
