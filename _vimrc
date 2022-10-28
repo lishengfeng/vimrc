@@ -579,7 +579,7 @@ cnoremap kj <ESC>
 cmap w!! w !sudo tee > /dev/null %
 " mkdir -p ~/.vim/plugin
 " mkdir -p ~/.vim/bundle
-" wget -P ~/.vim/plugin/ https://raw.githubusercontent.com/mbbill/echofunc/master/after/plugin/echofunc.vim
+" curl https://raw.githubusercontent.com/mbbill/echofunc/master/after/plugin/echofunc.vim > ~/.vim/plugin/echofunc.vim
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " Now add the following lines as shown in the screenshot below. Then save and exit vim with VIM command ‘:wq!’
 """"""""""""""""""""""""""""""""""""""""""

@@ -1,3 +1,13 @@
+# To use vimrc
+```
+curl -OL https://raw.githubusercontent.com/lishengfeng/vimrc/master/_vimrc
+mv _vimrc .vimrc
+mkdir -p ~/.vim/plugin
+mkdir -p ~/.vim/bundle
+curl https://raw.githubusercontent.com/mbbill/echofunc/master/after/plugin/echofunc.vim > ~/.vim/plugin/echofunc.vim
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
+
 # vimrc
 vimrc
 
